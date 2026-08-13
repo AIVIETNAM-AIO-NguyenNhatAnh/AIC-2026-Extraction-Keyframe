@@ -1,0 +1,10 @@
+numpy
+opencv-python
+pyyaml
+tqdm
+
+# BẮT BUỘC — extract_keyframes.py chỉ còn 1 method "transnetv2_similarity" (Cách 5), không còn
+# fallback nào khác. Thiếu 2 gói này -> video đó sẽ LỖI (raise rõ ràng, in ra + ghi vào
+# data/keyframes/_failed_videos.txt), không tự động chạy uniform thay thế nữa.
+transnetv2-pytorch
+ffmpeg-python
