@@ -1,0 +1,20 @@
+# Cấu hình cho package tách riêng aic2026-keyframe-worker — CHỈ phần keyframe, giữ đúng giá
+# trị mặc định với aic2026-project/configs/pipeline_config.yaml để kết quả trích ra tương thích
+# 100% khi gộp lại vào repo chính. Đừng đổi các giá trị này trừ khi cả team thống nhất đổi
+# chung trong configs/pipeline_config.yaml của repo chính — lệch cấu hình giữa các máy sẽ ra
+# keyframe không đồng nhất (số lượng/khoảng cách khác nhau giữa các phần do từng người tự trích).
+
+paths:
+  raw_videos: "data/raw"
+  keyframes: "data/keyframes"
+
+keyframe:
+  # CHỈ 1 method duy nhất: "transnetv2_similarity" (Cách 5) — cả team thống nhất dùng. Method
+  # "uniform" đã bị GỠ BỎ hoàn toàn khỏi repo, không còn dùng làm fallback nữa. Cần cài
+  # transnetv2-pytorch + ffmpeg (xem requirements.txt, BẮT BUỘC); nếu máy nào thiếu, code RAISE
+  # LỖI RÕ RÀNG cho video đó (in ra + ghi vào data/keyframes/_failed_videos.txt) thay vì âm thầm
+  # dùng uniform như trước — cài đủ dependency rồi chạy lại đúng video bị lỗi.
+  max_frames_per_video: null    # null = không giới hạn, extract hết toàn bộ video
+  candidate_every_seconds: 0.5
+  similarity_threshold: 0.075
+  transnet_threshold: 0.5
